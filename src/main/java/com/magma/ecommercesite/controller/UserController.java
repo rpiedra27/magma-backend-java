@@ -12,34 +12,32 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.magma.ecommercesite.model.Content;
-import com.magma.ecommercesite.repository.ContentCollectionRepository;
+import com.magma.ecommercesite.model.User;
+import com.magma.ecommercesite.repository.UserCollectionRepository;
 
 @RestController
-@RequestMapping("/api/content")
-public class ContentController {
-  private final ContentCollectionRepository repository;
+@RequestMapping("/api/users")
+public class UserController {
+  private final UserCollectionRepository repository;
 
-  public ContentController(ContentCollectionRepository repository){
+  public UserController(UserCollectionRepository repository) {
     this.repository = repository;
   }
 
   @GetMapping("")
-  public List<User> findAll(){
+  public List<User> findAllUsers() {
     return repository.findAllUsers();
-
   }
 
   @GetMapping("/{email}")
-  public List<Content> findUserByEmail(@PathVariable String email){
+  public User findUserByEmail(@PathVariable String email) {
     return repository.findUserByEmail(email)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping("")
-  public void createUser(@RequestBody Content content) { // indicates that a method parameter should be bound to the body of
-                              // a web request
-    repository.save(content);
+  public void createUser(@RequestBody User user) {
+    repository.save(user);
   }
 }
