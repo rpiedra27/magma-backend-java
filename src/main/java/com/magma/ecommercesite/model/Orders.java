@@ -1,12 +1,15 @@
 package com.magma.ecommercesite.model;
 
+import java.sql.Timestamp;
+
 import org.springframework.data.annotation.Id;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public record Users(
+public record Orders(
     @Id Integer id,
-    @NotEmpty String username,
-    @NotEmpty String email,
-    @NotEmpty String password) {
+    @NotEmpty Integer user_id,
+    @NotEmpty Integer cost,
+    @NotEmpty Timestamp timestamp) {
+
 }

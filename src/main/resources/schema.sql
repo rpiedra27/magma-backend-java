@@ -30,3 +30,17 @@ CREATE TABLE IF NOT EXISTS orders (
 INSERT INTO users(username, email, password)
   VALUES ('rp', 'rpiedra_27@outlook.com', 'pass');
 
+INSERT INTO items(name, description, price, image_url)
+  VALUES ('Pizza de jamón', 'Salsa: Tomate Queso: Mozarella Ingredientes: Jamón', 5000, 'https://');
+
+INSERT INTO items(name, description, price, image_url)
+  VALUES ('Pizza de pepperoni', 'Salsa: Tomate Queso: Gouda Ingredientes: Pepperoni', 5500, 'https://');
+
+INSERT INTO items(name, description, price, image_url)
+  VALUES ('Pizza de texana', 'Salsa: BBQ Queso: Gouda Ingredientes: Jamón y cebolla', 6000, 'https://');
+
+INSERT INTO items(name, description, price, image_url)
+  VALUES ('Pizza de suprema', 'Salsa: Tomate Queso: Mozzarella Ingredientes: Pepperoni, jamón, chile dulce, hongos, carne molida y cebolla', 7000, 'https://');
+
+INSERT INTO items(name, description, price, image_url)
+  VALUES ('Pizza de piña', 'Salsa: Tomate Queso: Parmesano Ingredientes: Piña y jamón', 5500, 'https://');

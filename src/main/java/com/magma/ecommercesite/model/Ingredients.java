@@ -4,9 +4,10 @@ import org.springframework.data.annotation.Id;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public record Users(
+public record Ingredients(
     @Id Integer id,
-    @NotEmpty String username,
-    @NotEmpty String email,
-    @NotEmpty String password) {
+    @NotEmpty String label,
+    @NotEmpty Integer price,
+    @NotEmpty String value) {
+
 }
