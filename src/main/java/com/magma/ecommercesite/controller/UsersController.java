@@ -41,15 +41,20 @@ public class UsersController {
     repository.save(user);
   }
 
-  @GetMapping("/filter/{email}")
-  public Users findByEmail(@PathVariable String email) {
-    return repository.findByEmailIs(email);
+  @GetMapping("/filter/user/{username}")
+  public List<Users> findAllByUsername(@PathVariable String username) {
+    return repository.findAllByUsername(username);
+  }
+
+  @GetMapping("/filter/email/{email}")
+  public List<Users> findAllByEmail(@PathVariable String email) {
+    return repository.findAllByEmail(email);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @PutMapping("/{email}")
   public void update(@RequestBody Users user, @PathVariable String email) {
-    if (!repository.existsByEmailIs(email)) {
+    if (!repository.existsByEmail(email)) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
     repository.save(user);
@@ -58,7 +63,7 @@ public class UsersController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{email}")
   public void deleteByEmail(@PathVariable String email) {
-    repository.deleteByEmailIs(email);
+    repository.deleteByEmail(email);
   }
 
 }

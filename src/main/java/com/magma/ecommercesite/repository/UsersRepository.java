@@ -1,13 +1,17 @@
 package com.magma.ecommercesite.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.ListCrudRepository;
 import com.magma.ecommercesite.model.Users;
 
 public interface UsersRepository extends ListCrudRepository<Users, Integer> {
 
-  Users findByEmailIs(String email);
+  List<Users> findAllByUsername(String username);
 
-  Boolean existsByEmailIs(String email);
+  List<Users> findAllByEmail(String email);
 
-  void deleteByEmailIs(String email);
+  Boolean existsByEmail(String email);
+
+  void deleteByEmail(String email);
 }
