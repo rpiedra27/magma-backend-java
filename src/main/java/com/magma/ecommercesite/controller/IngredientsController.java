@@ -18,10 +18,11 @@ import org.springframework.web.server.ResponseStatusException;
 import com.magma.ecommercesite.model.Ingredients;
 import com.magma.ecommercesite.repository.IngredientsRepository;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/ingredients")
+@RequestMapping("/ingredients")
 @CrossOrigin
 public class IngredientsController {
   private final IngredientsRepository repository;
@@ -29,7 +30,8 @@ public class IngredientsController {
   public IngredientsController(IngredientsRepository repository) {
     this.repository = repository;
   }
-
+  
+  @RolesAllowed("ROLE_USER")
   @GetMapping("")
   public List<Ingredients> findAll() {
     return repository.findAll();
@@ -42,17 +44,17 @@ public class IngredientsController {
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @PutMapping("/{id}")
-  public void update(@RequestBody Ingredients ingredient, @PathVariable Integer id) {
-    if (repository.findById(id) != null) {
+  @PutMapping("/{name}")
+  public void update(@RequestBody Ingredients ingredient, @PathVariable String name) {
+    if (repository.findByValue(name) != null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found");
     }
     repository.save(ingredient);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @DeleteMapping("/{id}")
-  public void delete(@PathVariable Integer id) {
-    repository.deleteById(id);
+  @DeleteMapping("/{name}")
+  public void delete(@PathVariable String name) {
+    repository.deleteByValue(name);
   }
 }

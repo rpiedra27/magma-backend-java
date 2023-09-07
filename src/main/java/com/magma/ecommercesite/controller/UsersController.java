@@ -21,7 +21,7 @@ import com.magma.ecommercesite.repository.UsersRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 @CrossOrigin
 public class UsersController {
   private final UsersRepository repository;
@@ -42,13 +42,13 @@ public class UsersController {
   }
 
   @GetMapping("/filter/user/{username}")
-  public List<Users> findAllByUsername(@PathVariable String username) {
-    return repository.findAllByUsername(username);
+  public Users findUsersByName(@PathVariable String username) {
+    return repository.findUsersByUsername(username);
   }
 
   @GetMapping("/filter/email/{email}")
-  public List<Users> findAllByEmail(@PathVariable String email) {
-    return repository.findAllByEmail(email);
+  public Users findUsersByEmail(@PathVariable String email) {
+    return repository.findUsersByEmail(email);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)

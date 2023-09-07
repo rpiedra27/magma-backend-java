@@ -2,14 +2,19 @@ package com.magma.ecommercesite.repository;
 
 import java.util.List;
 
-import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import com.magma.ecommercesite.model.Users;
 
-public interface UsersRepository extends ListCrudRepository<Users, Integer> {
+public interface UsersRepository extends MongoRepository<Users, String> {
 
-  List<Users> findAllByUsername(String username);
+  List<Users> findAll();
 
-  List<Users> findAllByEmail(String email);
+  public long count();
+
+  Users findUsersByUsername(String name);
+
+  Users findUsersByEmail(String email);
 
   Boolean existsByEmail(String email);
 

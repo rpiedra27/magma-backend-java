@@ -21,7 +21,7 @@ import com.magma.ecommercesite.repository.ItemsRepository;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/items")
+@RequestMapping("/items")
 @CrossOrigin
 public class ItemsController {
   private final ItemsRepository repository;
@@ -42,17 +42,17 @@ public class ItemsController {
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @PutMapping("/{id}")
-  public void update(@RequestBody Items item, @PathVariable Integer id) {
-    if (repository.findById(id) != null) {
+  @PutMapping("/{name}")
+  public void update(@RequestBody Items item, @PathVariable String name) {
+    if (repository.findByName(name) != null) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item not found");
     }
     repository.save(item);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @DeleteMapping("/{id}")
-  public void delete(@PathVariable Integer id) {
-    repository.deleteById(id);
+  @DeleteMapping("/{name}")
+  public void delete(@PathVariable String name) {
+    repository.deleteByName(name);
   }
 }
