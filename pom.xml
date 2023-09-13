@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -9,9 +8,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.magma</groupId>
-	<artifactId>ecommerce-site</artifactId>
+	<artifactId>magma-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ecommerce-site</name>
+	<name>magma-api</name>
 	<description>Magma Pizza REST API</description>
 	<properties>
 		<java.version>17</java.version>
@@ -66,6 +65,11 @@
       <version>0.11.5</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-webapp-maven-plugin</artifactId>
+      <version>2.12.0</version>
+    </dependency>
 	</dependencies>
 
 	<build>
@@ -74,6 +78,62 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+		    <plugin>
+		        <groupId>com.microsoft.azure</groupId>
+		        <artifactId>azure-spring-apps-maven-plugin</artifactId>
+		        <version>1.18.0</version>
+		        <configuration>
+		            <subscriptionId>f847210d-8766-44e8-be4f-1d88f573b0e5</subscriptionId>
+		            <resourceGroup>magma-group</resourceGroup>
+		            <clusterName>magma-service</clusterName>
+		            <appName>magma-api</appName>
+		            <isPublic>true</isPublic>
+		            <deployment>
+		                <cpu>1</cpu>
+		                <memoryInGB>2</memoryInGB>
+		                <instanceCount>1</instanceCount>
+		                <runtimeVersion>Java 17</runtimeVersion>
+		                <resources>
+		                    <resource>
+		                        <filtering/>
+		                        <mergeId/>
+		                        <targetPath/>
+		                        <directory>${project.basedir}/target</directory>
+		                        <includes>
+		                            <include>*.jar</include>
+		                        </includes>
+		                    </resource>
+		                </resources>
+		            </deployment>
+		        </configuration>
+		    </plugin>
+		    <plugin>
+		        <groupId>com.microsoft.azure</groupId>
+		        <artifactId>azure-webapp-maven-plugin</artifactId>
+		        <version>2.12.0</version>
+		        <configuration>
+		            <schemaVersion>v2</schemaVersion>
+		            <resourceGroup>magma-api-1694568202698-rg</resourceGroup>
+		            <appName>magma-api-1694568202698</appName>
+		            <pricingTier>F1</pricingTier>
+		            <region>eastus</region>
+		            <runtime>
+		                <os>Windows</os>
+		                <javaVersion>Java 17</javaVersion>
+		                <webContainer>Java SE</webContainer>
+		            </runtime>
+		            <deployment>
+		                <resources>
+		                    <resource>
+		                        <directory>${project.basedir}/target</directory>
+		                        <includes>
+		                            <include>*.jar</include>
+		                        </includes>
+		                    </resource>
+		                </resources>
+		            </deployment>
+		        </configuration>
+		    </plugin>
 		</plugins>
 	</build>
 
